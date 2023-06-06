@@ -2,7 +2,9 @@ from httpx._client import BaseClient
 
 
 class BaseCompiler:
-	"""docstring for  BaseCompiler"""
+	""" 
+	Base class for synchronous and asynchronous compiler
+	"""
 	
 	client = BaseClient
 
@@ -15,6 +17,7 @@ class BaseCompiler:
 
 
 	def _get_lang_data(self, lang: str, code: str) -> dict:
+		""" You get a language config to send a POST request to the compiler """
 		_lang_configs = {
 			"python": {
 				"name": "Python",

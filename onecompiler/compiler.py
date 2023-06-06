@@ -3,7 +3,9 @@ from base_compiler import BaseCompiler
 
 
 class Compiler(BaseCompiler):
-	"""docstring for Compiler"""
+	"""
+		Synchronous compiler
+	"""
 	def __init__(self):
 
 		self._client = Client()
@@ -11,6 +13,7 @@ class Compiler(BaseCompiler):
 
 
 	def compiler(self, lang: str, code: str) -> dict:
+		""" compiles your code """
 		lang_data = self._get_lang_data(lang, code)
 
 		if lang_data is None:
