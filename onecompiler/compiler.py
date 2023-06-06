@@ -34,8 +34,3 @@ class Compiler(BaseCompiler):
 					return self.compiler.compiler(lang, code)
 				
 				return func
-
-
-compiler = Compiler()
-
-print(compiler.to.bash('echo 1'))

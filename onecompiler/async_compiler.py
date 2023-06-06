@@ -35,14 +35,3 @@ class AsyncCompiler(BaseCompiler):
 				
 				return func
 
-
-import asyncio 
-
-async def main():
-	compiler = AsyncCompiler()
-
-	data = await compiler.to.bash('echo 1')
-	print(data)
-
-
-asyncio.run(main())
