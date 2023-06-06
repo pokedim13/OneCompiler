@@ -1,5 +1,5 @@
 from httpx import AsyncClient
-from base_compiler import BaseCompiler
+from onecompiler.base_models.base_compiler import BaseCompiler
 
 
 class AsyncCompiler(BaseCompiler):
@@ -21,6 +21,7 @@ class AsyncCompiler(BaseCompiler):
 
 		response = await self._client.post(self._url, json=lang_data, headers=self._headers)
 		return response.text
+	
 
 
 	class ToLang:
