@@ -1,16 +1,16 @@
 from httpx import AsyncClient
 from onecompiler.base_models import BaseCompiler
 from onecompiler.pydantic_models import Response
-import asyncio
+import asyncio, time
 
 class ToLang:
 	def __init__(self, compiler):
 			self.compiler = compiler
 
-	async def __getattr__(self, lang: str):
+	def __getattr__(self, lang: str):
 		async def func(code: str):
 			return await self.compiler.compiler(lang, code) 
-		return await func
+		return func
 
 class AsyncCompiler(BaseCompiler):
     def __init__(self) -> None:
@@ -22,10 +22,6 @@ class AsyncCompiler(BaseCompiler):
         """ compiles your code """
         lang_data = self._get_lang_data(lang, code)
         lang_data.properties.files[0].content = code
-        return Response.parse_obj(await self._client.post(self._url, json=lang_data.dict(), headers=self._headers).json())
+        res = await self._client.post(self._url, json=lang_data.dict(), headers=self._headers)
+        return Response.parse_obj(res.json())
     
-async def main():
-	compiler = AsyncCompiler()
-	print(compiler.to.py())
-	
-asyncio.run(main())
