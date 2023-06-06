@@ -19,7 +19,7 @@ class AsyncCompiler(BaseCompiler):
 		if lang_data is None:
 			raise Exception('no lang')
 
-		response = await self._client.post(self._url, json=lang_data, headers=self._headers)
+		response = await self._client.post(self._url, json=lang_data)
 		return response.text
 
 

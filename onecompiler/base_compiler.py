@@ -9,9 +9,6 @@ class BaseCompiler:
 	client = BaseClient
 
 	_url = "https://onecompiler.com/api/code/exec"
-	_headers = {
-		"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.124 YaBrowser/22.9.5.710 Yowser/2.5 Safari/537.36"
-	}
 
 	languages = ['python', 'js', 'brainfk', 'cpp', 'bash', 'c', 'php', 'java', 'rust', 'haskell', 'cs', 'pascal', 'go']
 
