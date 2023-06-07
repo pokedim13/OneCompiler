@@ -24,8 +24,3 @@ class Compiler(BaseCompiler):
         lang_data.properties.files[0].content = code
         res = self._client.post(self._url, json=lang_data.dict(), headers=self._headers).json()
         return Response.parse_obj(res)
-    
-
-if __name__ == "__main__":
-	compiler = Compiler()
-	print(compiler.to.sh('echo "Hello, World!"'))

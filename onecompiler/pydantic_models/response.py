@@ -28,7 +28,7 @@ class Job(BaseModel):
     mode: str
     description: Any
     extension: str
-    concurrentJobs: int
+    concurrentJobs: int = None
     languageType: str
     active: bool
     properties: Properties
