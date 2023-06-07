@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "onecompiler"
-version = "0.1.1"
+version = "0.1.21"
 description = ""
 authors = ["pokedim13 <skinxedovich@vk.com>"]
 license = "Apache"

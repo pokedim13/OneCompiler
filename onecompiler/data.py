@@ -1018,7 +1018,7 @@ data = {
                 "files": [
                 {
                     "name": "commands.sql",
-                    "content": "\n-- create\nCREATE TABLE EMPLOYEE (\n  empId INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  dept TEXT NOT NULL\n);\n\n-- insert\nINSERT INTO EMPLOYEE VALUES (0001, 'Clark', 'Sales');\nINSERT INTO EMPLOYEE VALUES (0002, 'Dave', 'Accounting');\nINSERT INTO EMPLOYEE VALUES (0003, 'Ava', 'Sales');\n\n-- fetch \nSELECT * FROM EMPLOYEE WHERE dept = 'Sales';\n"
+                    "content": "{code}"
                 }
                 ]
             },
@@ -1040,7 +1040,7 @@ data = {
                 "files": [
                 {
                     "name": "commands.redis",
-                    "content": "lpush k1 v1\nlpush k1 v2\nlpop k1"
+                    "content": "{code}"
                 }
                 ]
             },
@@ -1062,16 +1062,9 @@ data = {
                 "files": [
                 {
                     "name": "queries.sql",
-                    "content": "\n-- create\nCREATE TABLE EMPLOYEE (\n  empId INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  dept TEXT NOT NULL\n);\n\n-- insert\nINSERT INTO EMPLOYEE VALUES (0001, 'Clark', 'Sales');\nINSERT INTO EMPLOYEE VALUES (0002, 'Dave', 'Accounting');\nINSERT INTO EMPLOYEE VALUES (0003, 'Ava', 'Sales');\n\n-- fetch \nSELECT * FROM EMPLOYEE WHERE dept = 'Sales';\n"
+                    "content": "{code}"
                 }
                 ],
-                "newFileOptions": [
-                {
-                    "helpText": "Add init schema",
-                    "name": "init.sql",
-                    "content": "CREATE TABLE continents (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    name VARCHAR(50) NOT NULL\n);\n\nINSERT INTO continents (name) VALUES\n('Africa'),\n('Antarctica'),\n('Asia'),\n('Europe'),\n('North America'),\n('South America'),\n('Australia');"
-                }
-                ]
             },
             "visibility": "public"
             },
@@ -1091,7 +1084,7 @@ data = {
                 "files": [
                 {
                     "name": "script.js",
-                    "content": "\ndb.employees.insertMany([\n  {empId: 1, name: 'Clark', dept: 'Sales' },\n  {empId: 2, name: 'Dave', dept: 'Accounting' },\n  {empId: 3, name: 'Ava', dept: 'Sales' }\n]);\n\ndb.employees.find({dept: 'Sales'});"
+                    "content": "{code}"
                 }
                 ]
             },
@@ -1113,7 +1106,7 @@ data = {
                 "files": [
                 {
                     "name": "commands.sql",
-                    "content": "\n-- create\nCREATE TABLE EMPLOYEE (\n  empId INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  dept TEXT NOT NULL\n);\n\n-- insert\nINSERT INTO EMPLOYEE VALUES (0001, 'Clark', 'Sales');\nINSERT INTO EMPLOYEE VALUES (0002, 'Dave', 'Accounting');\nINSERT INTO EMPLOYEE VALUES (0003, 'Ava', 'Sales');\n\n-- fetch \nSELECT * FROM EMPLOYEE WHERE dept = 'Sales';\n"
+                    "content": "{code}"
                 }
                 ]
             },
@@ -1135,7 +1128,7 @@ data = {
                 "files": [
                 {
                     "name": "queries.sql",
-                    "content": "\n-- create\nCREATE TABLE EMPLOYEE (\n  empId int,\n  name varchar(100),\n  dept varchar(50)\n);\n\n-- insert\nINSERT INTO EMPLOYEE(empId,name,dept) VALUES (0001, 'Clark', 'Sales');\nINSERT INTO EMPLOYEE(empId,name,dept) VALUES (0002, 'Dave', 'Accounting');\nINSERT INTO EMPLOYEE(empId,name,dept) VALUES (0003, 'Ava', 'Sales');\n\n-- fetch \nSELECT * FROM EMPLOYEE;\nGO\n"
+                    "content": "{code}"
                 }
                 ]
             },
