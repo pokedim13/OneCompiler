@@ -973,6 +973,174 @@ data = {
                 ]
             },
             "visibility": "public"
+            },
+        "sqlite": {
+            "name": "SQLite",
+            "title": "SQLite",
+            "mode": "sql",
+            "description": null,
+            "extension": "sql",
+            "languageType": "database",
+            "active": true,
+            "worker": "j",
+            "workerId": 82,
+            "properties": {
+                "language": "sqlite",
+                "docs": true,
+                "tutorials": false,
+                "cheatsheets": false,
+                "files": [
+                {
+                    "name": "queries.sql",
+                    "content": "{code}"
+                }
+                ],
+                "result": {
+                "success": true,
+                "output": "1|Clark|Sales\n3|Ava|Sales\n"
+                }
+            },
+            "visibility": "public"
+            },
+        "postgres":{
+            "name": "PostgreSQL",
+            "title": "PostgreSQL",
+            "mode": "sql",
+            "description": null,
+            "extension": "sql",
+            "languageType": "database",
+            "active": true,
+            "properties": {
+                "language": "postgresql",
+                "docs": false,
+                "tutorials": false,
+                "cheatsheets": false,
+                "files": [
+                {
+                    "name": "commands.sql",
+                    "content": "\n-- create\nCREATE TABLE EMPLOYEE (\n  empId INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  dept TEXT NOT NULL\n);\n\n-- insert\nINSERT INTO EMPLOYEE VALUES (0001, 'Clark', 'Sales');\nINSERT INTO EMPLOYEE VALUES (0002, 'Dave', 'Accounting');\nINSERT INTO EMPLOYEE VALUES (0003, 'Ava', 'Sales');\n\n-- fetch \nSELECT * FROM EMPLOYEE WHERE dept = 'Sales';\n"
+                }
+                ]
+            },
+            "visibility": "public"
+            },
+        "redis": {
+            "name": "Redis",
+            "title": "Redis",
+            "mode": "javascript",
+            "description": null,
+            "extension": "redis",
+            "languageType": "database",
+            "active": true,
+            "properties": {
+                "language": "redis",
+                "docs": true,
+                "tutorials": false,
+                "cheatsheets": false,
+                "files": [
+                {
+                    "name": "commands.redis",
+                    "content": "lpush k1 v1\nlpush k1 v2\nlpop k1"
+                }
+                ]
+            },
+            "visibility": "public"
+            },
+        "mysql": {
+            "name": "MySQL",
+            "title": "MySQL",
+            "mode": "sql",
+            "description": null,
+            "extension": "sql",
+            "languageType": "database",
+            "active": true,
+            "properties": {
+                "language": "mysql",
+                "docs": false,
+                "tutorials": false,
+                "cheatsheets": false,
+                "files": [
+                {
+                    "name": "queries.sql",
+                    "content": "\n-- create\nCREATE TABLE EMPLOYEE (\n  empId INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  dept TEXT NOT NULL\n);\n\n-- insert\nINSERT INTO EMPLOYEE VALUES (0001, 'Clark', 'Sales');\nINSERT INTO EMPLOYEE VALUES (0002, 'Dave', 'Accounting');\nINSERT INTO EMPLOYEE VALUES (0003, 'Ava', 'Sales');\n\n-- fetch \nSELECT * FROM EMPLOYEE WHERE dept = 'Sales';\n"
+                }
+                ],
+                "newFileOptions": [
+                {
+                    "helpText": "Add init schema",
+                    "name": "init.sql",
+                    "content": "CREATE TABLE continents (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    name VARCHAR(50) NOT NULL\n);\n\nINSERT INTO continents (name) VALUES\n('Africa'),\n('Antarctica'),\n('Asia'),\n('Europe'),\n('North America'),\n('South America'),\n('Australia');"
+                }
+                ]
+            },
+            "visibility": "public"
+            },
+        "mongo": {
+            "name": "MongoDB",
+            "title": "MongoDB",
+            "mode": "javascript",
+            "description": null,
+            "extension": "js",
+            "languageType": "database",
+            "active": true,
+            "properties": {
+                "language": "mongodb",
+                "docs": false,
+                "tutorials": false,
+                "cheatsheets": false,
+                "files": [
+                {
+                    "name": "script.js",
+                    "content": "\ndb.employees.insertMany([\n  {empId: 1, name: 'Clark', dept: 'Sales' },\n  {empId: 2, name: 'Dave', dept: 'Accounting' },\n  {empId: 3, name: 'Ava', dept: 'Sales' }\n]);\n\ndb.employees.find({dept: 'Sales'});"
+                }
+                ]
+            },
+            "visibility": "public"
+            },
+        "maria": {
+            "name": "MariaDB",
+            "title": "MariaDB",
+            "mode": "sql",
+            "description": null,
+            "extension": "sql",
+            "languageType": "database",
+            "active": true,
+            "properties": {
+                "language": "mariadb",
+                "docs": true,
+                "tutorials": false,
+                "cheatsheets": false,
+                "files": [
+                {
+                    "name": "commands.sql",
+                    "content": "\n-- create\nCREATE TABLE EMPLOYEE (\n  empId INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  dept TEXT NOT NULL\n);\n\n-- insert\nINSERT INTO EMPLOYEE VALUES (0001, 'Clark', 'Sales');\nINSERT INTO EMPLOYEE VALUES (0002, 'Dave', 'Accounting');\nINSERT INTO EMPLOYEE VALUES (0003, 'Ava', 'Sales');\n\n-- fetch \nSELECT * FROM EMPLOYEE WHERE dept = 'Sales';\n"
+                }
+                ]
+            },
+            "visibility": "public"
+            },
+        "ms_sql":{
+            "name": "Microsoft SQL Server",
+            "title": "SQL Server",
+            "mode": "sql",
+            "description": null,
+            "extension": "sql",
+            "languageType": "database",
+            "active": true,
+            "properties": {
+                "language": "sqlserver",
+                "docs": false,
+                "tutorials": false,
+                "cheatsheets": false,
+                "files": [
+                {
+                    "name": "queries.sql",
+                    "content": "\n-- create\nCREATE TABLE EMPLOYEE (\n  empId int,\n  name varchar(100),\n  dept varchar(50)\n);\n\n-- insert\nINSERT INTO EMPLOYEE(empId,name,dept) VALUES (0001, 'Clark', 'Sales');\nINSERT INTO EMPLOYEE(empId,name,dept) VALUES (0002, 'Dave', 'Accounting');\nINSERT INTO EMPLOYEE(empId,name,dept) VALUES (0003, 'Ava', 'Sales');\n\n-- fetch \nSELECT * FROM EMPLOYEE;\nGO\n"
+                }
+                ]
+            },
+            "concurrentJobs": 5,
+            "visibility": "public"
             }
 	}
 

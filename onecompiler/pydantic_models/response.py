@@ -15,8 +15,8 @@ class Properties(BaseModel):
     docs: bool
     tutorials: bool
     cheatsheets: bool
-    filesEditable: bool
-    filesDeletable: bool
+    filesEditable: bool = None
+    filesDeletable: bool = None
     files: List[File]
     outbound: str
 
@@ -24,7 +24,7 @@ class Properties(BaseModel):
 class Job(BaseModel):
     name: str
     title: str
-    version: str
+    version: str = None
     mode: str
     description: Any
     extension: str
