@@ -1,6 +1,7 @@
 from httpx import Client
 from onecompiler.base_models import BaseCompiler
 from onecompiler.pydantic_models import Response
+from pydantic.error_wrappers import ValidationError
 
 class ToLang:
 		def __init__(self, compiler):
@@ -21,4 +22,10 @@ class Compiler(BaseCompiler):
         """ compiles your code """
         lang_data = self._get_lang_data(lang, code)
         lang_data.properties.files[0].content = code
-        return Response.parse_obj(self._client.post(self._url, json=lang_data.dict(), headers=self._headers).json())
+        res = self._client.post(self._url, json=lang_data.dict(), headers=self._headers).json()
+        return Response.parse_obj(res)
+    
+
+if __name__ == "__main__":
+	compiler = Compiler()
+	print(compiler.to.sh('echo "Hello, World!"'))

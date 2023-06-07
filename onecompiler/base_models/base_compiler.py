@@ -22,4 +22,5 @@ class BaseCompiler:
 		""" You get a language config to send a POST request to the compiler """
 		if lang not in self.languages:
 			raise LangNotFound
-		return Lang.parse_obj(data.get(lang)) 
+		d = data.get(lang)
+		return Lang.parse_obj(d) 

@@ -38,8 +38,8 @@ class Job(BaseModel):
 
 class Response(BaseModel):
     exception: Any
-    stdout: str
+    stdout: str = None
     stderr: Any
-    executionTime: int
-    job: Job
+    executionTime: int = None
+    job: Job = None
     newVisibility: Any

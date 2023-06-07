@@ -973,8 +973,7 @@ data = {
                 ]
             },
             "visibility": "public"
-            },
-
+            }
 	}
 
 test = {
