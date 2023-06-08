@@ -21,7 +21,7 @@ class BaseCompiler:
 	all_languages = {i: list(data[i]) for i in data}
 
 
-	def _create_lang_data(self, lang, lang_type, code):
+	def _create_lang_data(self, lang, lang_type, code) -> dict:
 		full_name, extension = data[lang_type][lang]
 		
 		finall_data = {
