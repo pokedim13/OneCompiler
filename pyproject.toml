@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "onecompiler"
+version = "1.1.1"
+description = ""
+authors = ["pokedim13 <skinxedovich@vk.com>"]
+license = "Apache"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+httpx = "^0.24.1"
+pydantic = "^1.10.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
