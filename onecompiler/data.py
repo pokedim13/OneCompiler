@@ -17,11 +17,11 @@ data = {
       "c",
       "c"
     ],
-    "cbl": [
+    "cobol": [
       "cobol",
       "cbl"
     ],
-    "clj": [
+    "clojure": [
       "clojure",
       "clj"
     ],
@@ -49,7 +49,7 @@ data = {
       "elixir",
       "ex"
     ],
-    "erl": [
+    "erlang": [
       "erlang",
       "erl"
     ],
@@ -69,7 +69,7 @@ data = {
       "groovy",
       "groovy"
     ],
-    "hs": [
+    "haskell": [
       "haskell",
       "hs"
     ],
@@ -97,7 +97,7 @@ data = {
       "lua",
       "lua"
     ],
-    "ml": [
+    "ocaml": [
       "ocaml",
       "ml"
     ],
@@ -153,7 +153,7 @@ data = {
       "scala",
       "scala"
     ],
-    "sh": [
+    "bash": [
       "bash",
       "sh"
     ],

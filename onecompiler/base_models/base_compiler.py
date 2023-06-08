@@ -15,10 +15,10 @@ class BaseCompiler:
 		"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.124 YaBrowser/22.9.5.710 Yowser/2.5 Safari/537.36"
 	}
 
-	programming_langs = data['programming']
-	query_langs = data['query']
+	programming_langs = data['programming'].keys()
+	query_langs = data['query'].keys()
 
-	all_languages = {i: data[i] for i in data}
+	all_languages = {i: list(data[i]) for i in data}
 
 
 	def _create_lang_data(self, lang, lang_type, code):
