@@ -3,7 +3,7 @@ name = "onecompiler"
 version = "1.1.1"
 description = ""
 authors = ["pokedim13 <skinxedovich@vk.com>"]
-license = "Apache"
+license = "Apache-2.0"
 readme = "README.md"
 
 [tool.poetry.dependencies]
