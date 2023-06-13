@@ -1,29 +1,27 @@
 from httpx import Client
 from onecompiler.base_models import BaseCompiler
 from onecompiler.pydantic_models import Response
+from onecompiler.base_errors import LangNotFound
+from onecompiler import data
 
 
 class ToLang:
     """Wrapper wrapper, for requests, programming languages type, when the request is known"""
-    def __init__(self, compiler) -> None:
+    def __init__(self, compiler, lang_type: str) -> None:
         self.compiler: Compiler = compiler
+        self.lang_type = lang_type
 
     def __getattr__(self, lang: str):
         def func(code: str) -> Response:
-            if lang in self.compiler.programming_langs:
-                return self.compiler.compiler(lang, code)
+            _, lang_type = self.compiler._get_full_lang_name(lang)
+            
+            if lang_type is None:
+                raise LangNotFound
+            
+            if lang_type == self.lang_type:
+                return self.compiler.compile(lang, code)
         return func
 
-class QueryLang:
-    """Wrapper wrapper, for requests, database languages type, when the request is known"""
-    def __init__(self, compiler) -> None:
-        self.compiler = compiler
-
-    def __getattr__(self, lang: str):
-        def func(code: str) -> Response:
-            if lang in self.compiler.query_langs:
-                return self.compiler.compiler(lang, code)
-        return func
 
 class Compiler(BaseCompiler):
     """Synchronous compiler execution"""
@@ -31,10 +29,11 @@ class Compiler(BaseCompiler):
         super().__init__()
 
         self._client = Client()
-        self.to = ToLang(self)
-        self.query = QueryLang(self)
+        self.to = ToLang(self, 'programming')
+        self.query = ToLang(self, 'query')
 
-    def compiler(self, lang: str, code: str) -> Response:
+
+    def compile(self, lang: str, code: str) -> Response:
         """
         compiles your code
 
@@ -46,6 +45,7 @@ class Compiler(BaseCompiler):
             Response: Pydantic model
         """
         lang_data = self._get_lang_data(lang, code)        
+        
         res = self._client.post(self._url, json=lang_data.dict(), headers=self._headers).json()
         return Response.parse_obj(res)
     
