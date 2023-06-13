@@ -51,11 +51,11 @@ print(res2.stdout)
 ```	
 Or
 ```
-res = compiler.compiler(lang='js', code='console.log("Hello");')
+res = compiler.compile(lang='js', code='console.log("Hello");')
 print(res.stdout)
 # Hello
 
-res2 = compiler.compiler(lang='mysql', code='SELECT 10')
+res2 = compiler.compile(lang='mysql', code='SELECT 10')
 print(res2.stdout)
 # 10
 ```
