@@ -25,8 +25,8 @@ class ToLang:
 
 class Compiler(BaseCompiler):
     """Synchronous compiler execution"""
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, timeout: float = 4.9) -> None:
+        super().__init__(timeout)
 
         self._client = Client()
         self.to = ToLang(self, 'programming')
@@ -46,6 +46,5 @@ class Compiler(BaseCompiler):
         """
         lang_data = self._get_lang_data(lang, code)        
         
-        res = self._client.post(self._url, json=lang_data.dict(), headers=self._headers).json()
+        res = self._client.post(self._url, timeout=self.timeout json=lang_data.dict(), headers=self._headers).json()
         return Response.parse_obj(res)
-    

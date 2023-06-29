@@ -20,6 +20,8 @@ class BaseCompiler:
 
 	all_languages = {i: list(data[i]) for i in data}
 
+	def __init__(self, timeout: float = 4.9) -> None:
+		self.timeout = timeout		
 
 	def _create_lang_data(self, lang, lang_type, code) -> dict:
 		#full_name = data[lang_type][lang]
@@ -46,7 +48,7 @@ class BaseCompiler:
 		return finall_data
 
 
-	def get_full_lang_name(self, lang: str) -> tuple[str, str]:
+	def _get_full_lang_name(self, lang: str) -> tuple[str, str]:
 		for name, aliases in self.programming_langs:
 			if lang == name or lang in aliases:
 				return name, 'programming'
