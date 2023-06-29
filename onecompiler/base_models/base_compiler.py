@@ -15,8 +15,8 @@ class BaseCompiler:
 		"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.124 YaBrowser/22.9.5.710 Yowser/2.5 Safari/537.36"
 	}
 
-	programming_langs = data['programming'].keys()
-	query_langs = data['query'].keys()
+	programming_langs = data['programming'].items()
+	query_langs = data['query'].items()
 
 	all_languages = {i: list(data[i]) for i in data}
 
@@ -46,23 +46,13 @@ class BaseCompiler:
 		return finall_data
 
 
-	def _get_full_lang_name(self, lang: str):
-		full_name = None
-		lang_type = None
-
-		for langs in self.programming_langs:
-			if (lang == langs) or (lang in data['programming'][langs]):
-				lang_type = 'programming'
-				full_name = langs
-
-		if lang_type is None:
-			for langs in self.query_langs:
-				if (lang == langs) or (lang in data['query'][langs]):
-					lang_type = 'query'
-					full_name = langs
-
-		if lang_type and full_name:
-			return (full_name, lang_type)
+	def _get_full_lang_name(self, lang: str) -> tuple[str, str]:
+		for name, aliases in programming_langs:
+			if lang == name or lang in aliases:
+				return name, 'programming'
+		for name, aliases in query_langs:
+			if lang == name or lang in aliases:
+				return name, 'query'
 		raise LangNotFound
 
 
