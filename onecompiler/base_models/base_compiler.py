@@ -47,10 +47,10 @@ class BaseCompiler:
 
 
 	def _get_full_lang_name(self, lang: str) -> tuple[str, str]:
-		for name, aliases in programming_langs:
+		for name, aliases in self.programming_langs:
 			if lang == name or lang in aliases:
 				return name, 'programming'
-		for name, aliases in query_langs:
+		for name, aliases in self.query_langs:
 			if lang == name or lang in aliases:
 				return name, 'query'
 		raise LangNotFound
