@@ -23,3 +23,10 @@ class OneCompiler(BaseCompiler):
         url = "https://onecompiler.com/api/notifications/getNotificationsCount"
         res = await self._client.get(url)
         return res.json()
+    
+    async def ask_ai(self, prompt: str):
+        data = {"text": prompt, 
+                "dbType": "CumProject"}
+        url = "https://onecompiler.com/api/ai/ask-db"
+        res = await self._client.post(url, json=data)
+        return res.json()

@@ -9,6 +9,7 @@ class BaseStudio:
     _url = "https://onecompiler.com/api/studio/"
 
 class Studio(BaseStudio):
+    """Working only gave onecompiler token!!!"""
     def __init__(self, client: OneCompiler):
         self._client = client
 

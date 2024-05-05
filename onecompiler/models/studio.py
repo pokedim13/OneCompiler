@@ -88,18 +88,26 @@ class Workspace:
             _id: str
 
         class Metadata(BaseModel):
-            url: str
-            urlFromNode: str
+            url: str = None
+            urlFromNode: str = None
+
+        class MetadataDataBase(BaseModel):
+            host: str
+            port: str
+            db: str
+            username: str
+            password: str
 
         id: str = Field(alias="_id")
+        backup: str = None
         created: str
-        metadata: Metadata
+        metadata: MetadataDataBase | Metadata
         template: Template
         node: Node
         passCode: str
         nodeManager: NodeManager
         status: str
-        portMapping: List[PortMappingItem]
+        portMapping: List[PortMappingItem] | dict
         expiry: str
         user: User
         lastSeen: str
