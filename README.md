@@ -8,27 +8,27 @@
 <summary> Mini documentation </summary> <br>
 
 Installing the library
+```shell
+pip install onecompiler
 ```
-> pip install onecompiler
-```
-<br>
+<hr>
 
 Import
-```
+```python
 from onecompiler import Compiler	# Sync
 from onecompiler import AsyncCompiler	# Async
 ```
 <br>
 
 Initialization
-```
+```python
 compiler = Compiler()
 ```
 <br>
 
 Get a list of available languages
-```
-print( compiler.all_languages )
+```python
+print(compiler.all_languages)
 ```
 
 
@@ -36,9 +36,10 @@ print( compiler.all_languages )
 Languages are compiled through the Compiler attribute or using <code>compiler.to.lang</code> <br>
 » For query languages <code>compiler.query.lang</code>
 <br>
-	
-Example
-```
+<br>
+
+<b>Example:</b>
+```python
 # Sample JavaScript code
 res = compiler.to.js('console.log("Hello");')
 print(res.stdout)
@@ -50,7 +51,7 @@ print(res2.stdout)
 # 10
 ```	
 Or
-```
+```python
 res = compiler.compile(lang='js', code='console.log("Hello");')
 print(res.stdout)
 # Hello
