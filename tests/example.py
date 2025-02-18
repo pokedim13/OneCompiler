@@ -1,0 +1,5 @@
+from onecompiler.api import OneCompiler
+
+compiler = OneCompiler("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI0MmU4cms4MzMiLCJlbWFpbCI6InBva2VkaW0xMzF0cnlAZ21haWwuY29tIiwiaWF0IjoxNzM4NTg3MTg5fQ.YjFc1aEDZWnB6d9_Js0bNvs8nbVNvsrY7sOe4L4_NkY")
+
+print(compiler.studio.workspaces())
