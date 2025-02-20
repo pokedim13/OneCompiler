@@ -1,13 +1,29 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Dict, List, Optional, Union
 
-from pydantic import BaseModel, Field, RootModel
+from pydantic import BaseModel, RootModel, Field
+
+
+class Data(BaseModel):
+    queries: List
+
+
+class Region(BaseModel):
+    region_name: str = Field(..., alias='RegionName')
+    region_opt_status: str = Field(..., alias='RegionOptStatus')
 
 
 class Metadata(BaseModel):
-    url: str
-    url_from_node: str = Field(..., alias="urlFromNode")
+    host: Optional[str] = None
+    port: Optional[str] = None
+    db: Optional[str] = None
+    username: Optional[str] = None
+    password: Optional[str] = None
+    url: Optional[str] = None
+    url_from_node: Optional[str] = Field(None, alias='urlFromNode')
+    regions: Optional[List[Region]] = None
+    selected_region: Optional[str] = Field(None, alias='selectedRegion')
 
 
 class Template(BaseModel):
@@ -23,15 +39,20 @@ class NodeManager(BaseModel):
 
 
 class PortMappingItem(BaseModel):
-    container_port: int = Field(..., alias="containerPort")
-    node_port: int = Field(..., alias="nodePort")
+    container_port: int = Field(..., alias='containerPort')
+    node_port: int = Field(..., alias='nodePort')
 
 
 class User(BaseModel):
     _id: str
 
 
-class UsageCurrent(BaseModel):
+class UsageCurrentItem(BaseModel):
+    start: str
+    end: str
+
+
+class UsageHistoryItem(BaseModel):
     start: str
     end: str
 
@@ -39,21 +60,27 @@ class UsageCurrent(BaseModel):
 class WorkspaceModel(BaseModel):
     _id: str
     created: str
+    data: Optional[Data] = None
     metadata: Metadata
     template: Template
-    user_ip: str = Field(..., alias="userIp")
-    node: Node
-    pass_code: str = Field(..., alias="passCode")
-    node_manager: NodeManager = Field(..., alias="nodeManager")
+    user_ip: str = Field(..., alias='userIp')
+    node: Optional[Node] = None
+    pass_code: str = Field(..., alias='passCode')
+    node_manager: NodeManager = Field(..., alias='nodeManager')
     status: str
-    port_mapping: list[PortMappingItem] = Field(..., alias="portMapping")
+    port_mapping: Union[Dict[str, Any], List[PortMappingItem]] = Field(
+        ..., alias='portMapping'
+    )
     expiry: str
     user: User
-    last_seen: str = Field(..., alias="lastSeen")
-    usage_current: UsageCurrent = Field(..., alias="usageCurrent")
-    usage_history: list = Field(..., alias="usageHistory")
+    last_seen: str = Field(..., alias='lastSeen')
+    usage_current: Optional[UsageCurrentItem] = Field(..., alias='usageCurrent')
+    usage_history: List[UsageHistoryItem] = Field(..., alias='usageHistory')
     name: str
-    properties: dict[str, Any]
+    properties: Dict[str, Any]
+    usage_total: Optional[int] = Field(None, alias='usageTotal')
+    backup: Optional[str] = None
+
 
 class WorkspacesModel(RootModel):
-    root: list[WorkspaceModel]
+    root: List[WorkspaceModel]

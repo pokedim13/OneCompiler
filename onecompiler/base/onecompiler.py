@@ -1,11 +1,10 @@
 from abc import ABC, abstractmethod
 from typing import Generic, TypeVar
 
-from bs4 import BeautifulSoup, ResultSet
 from httpx import Response
-from pydantic import __version__ as pydantic_version
+from bs4 import BeautifulSoup, ResultSet
 
-from onecompiler.models import StatsModel, TemplatesModel, WorkspaceModel, WorkspacesModel
+from onecompiler.models import TemplatesModel, WorkspaceModel, WorkspacesModel, StatsModel
 
 T = TypeVar("T", bound="BaseOneCompiler")
 class BaseOneCompiler(ABC):
@@ -17,10 +16,6 @@ class BaseOneCompiler(ABC):
         prefix = "studio/"
         def __init__(self, onecompiler: T) -> None:
             self.onecompiler = onecompiler
-
-        @abstractmethod
-        def get_templates(self) -> TemplatesModel:
-            """Get templates for create vm or database."""
 
         @staticmethod
         def _parse_templates(response: Response) -> list[dict]:
@@ -38,26 +33,41 @@ class BaseOneCompiler(ABC):
             return results
 
         @abstractmethod
+        def get_templates(self) -> TemplatesModel:
+            """Get templates for create vm or database."""
+        
         def launch(self, template_name: str) -> WorkspaceModel:
             """Launch workspace."""
-
-        @abstractmethod
+            return self.onecompiler._request("POST",
+                                             model=WorkspaceModel,
+                                             url=f"{self.onecompiler._url}{self.prefix}workspace/launch",
+                                             json={"templateId": template_name})
+        
         def stats(self) -> StatsModel:
             """Stats for live containers."""
-
-        @abstractmethod
+            return self.onecompiler._request("GET",
+                                             model=StatsModel,
+                                             url=f"{self.onecompiler._url}{self.prefix}workspace/stats")
+        
         def usage(self, id: str) -> Response:
             """Indicate that you are still using workspace so that it does not turn off."""
-
-        @abstractmethod
+            return self.onecompiler._request("POST",
+                                             url=f"{self.onecompiler._url}{self.prefix}workspace/usage",
+                                             json={"templateId": id})
+        
         def workspace(self, id: str) -> WorkspaceModel:
             """Get workspace data (backup)."""
-
-        @abstractmethod
+            return self.onecompiler._request("GET",
+                                             model=WorkspaceModel,
+                                             url=f"{self.onecompiler._url}{self.prefix}workspace/{id}")
+        
         def workspaces(self) -> WorkspacesModel:
             """Get all user workspaces."""
+            return self.onecompiler._request("GET",
+                                             model=WorkspacesModel,
+                                             url=f"{self.onecompiler._url}{self.prefix}workspaces")
 
-    url = "https://onecompiler.com/api/"
+    _url = "https://onecompiler.com/api/"
     def __init__(self, token: str = None):
         self.compiler = self.Compiler(self)
         self.studio = self.Studio(self)
@@ -65,15 +75,10 @@ class BaseOneCompiler(ABC):
 
     def get_headers(self) -> dict:
         return {"Authorization": f"Bearer {self._token}"}
-    
-    @staticmethod
-    def _get_model[Model](model: Model, data: any) -> Model:
-        if pydantic_version.split(".")[0] == "1":
-            return model.parse_obj(data)
-        if pydantic_version.split(".")[0] == "2":
-            return model.model_validate(data)
-        raise ValueError("support pydantic version not found")
-    
-    @abstractmethod
+
     def get_notifications(self) -> Response:
         """Return count notifications"""
+
+    @abstractmethod
+    def _request[Model](self, method: str, model: Model = None, **kwargs) -> Response | Model:
+        ...

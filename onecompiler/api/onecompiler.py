@@ -1,4 +1,4 @@
-from httpx import Client, Response
+from httpx import Client, Response, AsyncClient
 
 from onecompiler.base import BaseOneCompiler
 from onecompiler.models import StatsModel, TemplatesModel, WorkspaceModel, WorkspacesModel
@@ -9,40 +9,37 @@ class OneCompiler(BaseOneCompiler):
         ...
 
     class Studio(BaseOneCompiler.Studio["OneCompiler"]):
-        def get_templates(self) -> dict:
+        def get_templates(self):
             res = self.onecompiler._client.get("https://onecompiler.com/studio")
-            res: TemplatesModel = self.onecompiler._get_model(TemplatesModel, self._parse_templates(res))
-            return res
-        
-        def launch(self, template_name: str) -> WorkspaceModel:
-            res = self.onecompiler._client.post(f"{self.onecompiler.url}{self.prefix}workspace/launch", json={"templateId": template_name})
-            res: WorkspaceModel = self.onecompiler._get_model(WorkspaceModel, res.json())
-            return res
-        
-        def stats(self) -> StatsModel:
-            res = self.onecompiler._client.get(f"{self.onecompiler.url}{self.prefix}workspace/stats")
-            res: StatsModel = self.onecompiler._get_model(StatsModel, res.json())
-            return res
-        
-        def usage(self, id: str) -> Response:
-            res = self.onecompiler._client.post(f"{self.onecompiler.url}{self.prefix}workspace/usage", json={"templateId": id})
-            return res
-        
-        def workspace(self, id: str) -> WorkspaceModel:
-            res = self.onecompiler._client.get(f"{self.onecompiler.url}{self.prefix}workspace/{id}")
-            res: WorkspaceModel = self.onecompiler._get_model(WorkspaceModel, res.json())
-            return res
-        
-        def workspaces(self) -> WorkspacesModel:
-            res = self.onecompiler._client.get(f"{self.onecompiler.url}{self.prefix}workspaces")
-            res: WorkspacesModel = self.onecompiler._get_model(WorkspacesModel, res.json())
+            res = TemplatesModel.model_validate(self._parse_templates(res))
             return res
 
     def __init__(self, token: str = None):
         super().__init__(token)
         self._client = Client(headers=self.get_headers())
 
-    def get_notifications(self) -> int:
-        res = self._client.get(f"{self.url}notifications/getNotificationsCount")
-        res = res.json().get("count")
+    def _request[Model](self, method: str, model: Model = None, **kwargs) -> Response | Model:
+        res = self._client.request(method=method, **kwargs)
+        if model is not None:
+            return model.model_validate(res.json())
+        return res
+    
+class AsyncOneCompiler(BaseOneCompiler):
+    class Compiler(BaseOneCompiler.Compiler["OneCompiler"]):
+        ...
+
+    class Studio(BaseOneCompiler.Studio["OneCompiler"]):
+        async def get_templates(self):
+            res = await self.onecompiler._client.get("https://onecompiler.com/studio")
+            res = TemplatesModel.model_validate(self._parse_templates(res))
+            return res
+
+    def __init__(self, token: str = None):
+        super().__init__(token)
+        self._client = AsyncClient(headers=self.get_headers())
+
+    async def _request[Model](self, method: str, model: Model = None, **kwargs) -> Response | Model:
+        res = await self._client.request(method=method, **kwargs)
+        if model is not None:
+            return model.model_validate(res.json())
         return res

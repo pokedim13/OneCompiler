@@ -1,3 +1,3 @@
-from .onecompoler import BaseOneCompiler
+from .onecompiler import BaseOneCompiler
 
 __all__ = ["BaseOneCompiler"]
