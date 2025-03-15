@@ -21,7 +21,7 @@ class BaseOneCompiler(ABC):
                 },
             }
 
-        def exec(self, lang: str, files: list):
+        def exec(self, lang: str, files: list) -> ExecModel:
             return self.onecompiler._request("POST",
                                                 model=ExecModel,
                                                 url=f"{self.onecompiler._url}{self.prefix}exec",

@@ -1,3 +1,3 @@
-from .compiler import OneCompiler, AsyncOneCompiler
+from .compiler import AsyncOneCompiler, OneCompiler
 
 __all__ = ("OneCompiler", "AsyncOneCompiler")

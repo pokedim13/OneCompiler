@@ -1,12 +1,12 @@
-from httpx import Client, Response, AsyncClient
+from httpx import AsyncClient, Client, Response
 
 from onecompiler.base import BaseOneCompiler
-from onecompiler.models import StatsModel, TemplatesModel, WorkspaceModel, WorkspacesModel
+from onecompiler.models import TemplatesModel
 
 
 class OneCompiler(BaseOneCompiler):
     class Studio(BaseOneCompiler.Studio["OneCompiler"]):
-        def get_templates(self):
+        def get_templates(self) -> TemplatesModel:
             res = self.onecompiler._request("GET", 
                                                 url="https://onecompiler.com/studio")
             return TemplatesModel.from_response(res)
@@ -23,7 +23,7 @@ class OneCompiler(BaseOneCompiler):
 
 class AsyncOneCompiler(BaseOneCompiler):
     class Studio(BaseOneCompiler.Studio["OneCompiler"]):
-        async def get_templates(self):
+        async def get_templates(self) -> TemplatesModel:
             res = await self.onecompiler._request("GET", 
                                                 url="https://onecompiler.com/studio")
             return TemplatesModel.from_response(res)

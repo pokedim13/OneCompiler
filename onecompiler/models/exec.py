@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 
@@ -14,9 +15,9 @@ class Properties(BaseModel):
     docs: bool | None = None
     tutorials: bool | None = None
     cheatsheets: bool | None = None
-    filesEditable: bool = None
-    filesDeletable: bool = None
-    files: List[File]
+    files_editable: bool = Field(None, alias="filesEditable")
+    files_deletable: bool = Field(None, alias="filesDeletable")
+    files: list[File]
     outbound: str
 
 
@@ -27,8 +28,8 @@ class Job(BaseModel):
     mode: str | None = None
     description: Any | None = None
     extension: str | None = None
-    concurrentJobs: int = None
-    languageType: str | None = None
+    concurrent_jobs: int = Field(None, alias="concurrentJobs")
+    language_type: str | None = Field(None, alias="languageType")
     active: bool | None = None
     properties: Properties
     visibility: str | None = None
@@ -39,6 +40,6 @@ class ExecModel(BaseModel):
     exception: Any
     stdout: str = None
     stderr: Any
-    executionTime: int = None
+    execution_time: int | None = Field(None, alias="executionTime")
     job: Job = None
-    newVisibility: Any
+    new_visibility: Any = Field(..., alias="newVisibility")

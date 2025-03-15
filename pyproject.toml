@@ -20,6 +20,7 @@ dev = [
 test = [
     "pytest>=8.3.5",
     "pytest-asyncio>=0.25.3",
+    "python-dotenv>=1.0.1",
 ]
 
 [tool.ruff]
