@@ -1,18 +1,56 @@
-[tool.poetry]
+[project]
 name = "onecompiler"
-version = "1.1.6"
-description = ""
-authors = ["pokedim13 <skinxedovich@vk.com>"]
-license = "Apache-2.0"
+version = "0.3.1"
+description = "Api online compilators. Create your VM access!"
+authors = [
+    {name = "Aleksey Baev",email = "skinxedovich@vk.com"}
+]
+maintainers = [
+  {name = "Aleksey Baev", email = "skinxedovich@vk.com"}
+]
 readme = "README.md"
-repository = "https://github.com/pokedim13/OneCompiler"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.13.3",
+    "httpx>=0.28.1",
+    "pydantic>=2.10.6",
+]
+license = {file = "LICENSE"}
+keywords = ["onecompiler", "API", "SDK"]
 
-[tool.poetry.dependencies]
-python = "^3.8"
-httpx = "^0.24.1"
-pydantic = "^1.10.8"
+[project.urls]
+Homepage = "https://github.com/pokedim13/OneCompiler"
+Documentation = "https://github.com/pokedim13/OneCompiler/tree/main/tests"
+Repository = "https://github.com/pokedim13/OneCompiler.git"
+Issues = "https://github.com/pokedim13/OneCompiler/issues"
 
+[dependency-groups]
+dev = [
+    "ruff>=0.11.0",
+]
+test = [
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.25.3",
+    "python-dotenv>=1.0.1",
+]
+
+[tool.ruff]
+line-length = 140
+exclude = [
+    "migrations",
+    "manage.py",
+]
+
+[tool.ruff.lint]
+unfixable = ["B"]
+select = ["F","B","E","I","UP","N","ANN","Q"]
+ignore = ["ANN002", "ANN003", "ANN101", "ANN102", "ANN204"]
+
+[[tool.uv.index]]
+name = "gitverse"
+url = "https://gitverse.ru/sweetdogs?tab=packages"
+publish-url = "https://gitverse.ru/api/packages/sweetdogs/pypi"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
