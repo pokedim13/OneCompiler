@@ -1,13 +1,20 @@
 [project]
 name = "onecompiler"
+<<<<<<< HEAD
 version = "0.3.1"
+=======
+version = "0.3.0"
+>>>>>>> fc759031311eeb863581f034e8a80cee58055f01
 description = "Api online compilators. Create your VM access!"
 authors = [
     {name = "Aleksey Baev",email = "skinxedovich@vk.com"}
 ]
+<<<<<<< HEAD
 maintainers = [
   {name = "Aleksey Baev", email = "skinxedovich@vk.com"}
 ]
+=======
+>>>>>>> fc759031311eeb863581f034e8a80cee58055f01
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -15,6 +22,7 @@ dependencies = [
     "httpx>=0.28.1",
     "pydantic>=2.10.6",
 ]
+<<<<<<< HEAD
 license = {file = "LICENSE"}
 keywords = ["onecompiler", "API", "SDK"]
 
@@ -34,6 +42,19 @@ test = [
     "python-dotenv>=1.0.1",
 ]
 
+=======
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.0",
+]
+test = [
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.25.3",
+    "python-dotenv>=1.0.1",
+]
+
+>>>>>>> fc759031311eeb863581f034e8a80cee58055f01
 [tool.ruff]
 line-length = 140
 exclude = [

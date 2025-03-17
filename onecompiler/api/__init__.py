@@ -1,4 +1,3 @@
-from onecompiler.api.compiler import Compiler
-from onecompiler.api.async_compiler import AsyncCompiler
+from .compiler import AsyncOneCompiler, OneCompiler
 
-__all__ = ["Compiler", "AsyncCompiler"]
+__all__ = ("OneCompiler", "AsyncOneCompiler")
