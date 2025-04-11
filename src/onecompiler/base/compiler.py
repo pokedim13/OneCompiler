@@ -3,7 +3,7 @@ from typing import Generic, TypeVar
 
 from httpx import Response
 
-from onecompiler.models import ExecModel, StatsModel, TemplatesModel, WorkspaceModel, WorkspacesModel
+from onecompiler.models import ExecModel, File, StatsModel, TemplatesModel, WorkspaceModel, WorkspacesModel
 
 T = TypeVar("T", bound="BaseOneCompiler")
 class BaseOneCompiler(ABC):
@@ -13,15 +13,22 @@ class BaseOneCompiler(ABC):
             self.onecompiler = onecompiler
 
         @staticmethod
-        def _get_exec_data(lang: str, files: list) -> dict:
+        def _get_exec_data(lang: str, files: list[dict] | list[File]) -> dict:
+            processed_files = []
+            for file in files:
+                if isinstance(file, File):
+                    processed_files.append({"name": file.name, "content": file.content})
+                else:
+                    processed_files.append(file)
+                    
             return {
                 "properties": {
                     "language": lang,
-                    "files": files
+                    "files": processed_files,
                 },
             }
 
-        def exec(self, lang: str, files: list) -> ExecModel:
+        def exec(self, lang: str, files: list[dict] | list[File]) -> ExecModel:
             return self.onecompiler._request("POST",
                                                 model=ExecModel,
                                                 url=f"{self.onecompiler._url}{self.prefix}exec",

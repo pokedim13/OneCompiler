@@ -1,6 +1,6 @@
 [project]
 name = "onecompiler"
-version = "0.3.1"
+version = "0.4.0"
 description = "Api online compilators. Create your VM access!"
 authors = [
     {name = "Aleksey Baev",email = "skinxedovich@vk.com"}
@@ -10,17 +10,17 @@ maintainers = [
 ]
 readme = "README.md"
 requires-python = ">=3.12"
+license = {file = "LICENSE"}
+keywords = ["OneCompiler", "API", "SDK"]
 dependencies = [
     "beautifulsoup4>=4.13.3",
     "httpx>=0.28.1",
     "pydantic>=2.10.6",
 ]
-license = {file = "LICENSE"}
-keywords = ["onecompiler", "API", "SDK"]
 
 [project.urls]
 Homepage = "https://github.com/pokedim13/OneCompiler"
-Documentation = "https://github.com/pokedim13/OneCompiler/tree/main/tests"
+Documentation = "https://github.com/pokedim13/OneCompiler"
 Repository = "https://github.com/pokedim13/OneCompiler.git"
 Issues = "https://github.com/pokedim13/OneCompiler/issues"
 
@@ -34,33 +34,23 @@ test = [
     "python-dotenv>=1.0.1",
 ]
 
-[dependency-groups]
-dev = [
-    "ruff>=0.11.0",
-]
-test = [
-    "pytest>=8.3.5",
-    "pytest-asyncio>=0.25.3",
-    "python-dotenv>=1.0.1",
-]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.ruff]
-line-length = 140
-exclude = [
-    "migrations",
-    "manage.py",
-]
 
-[tool.ruff.lint]
-unfixable = ["B"]
-select = ["F","B","E","I","UP","N","ANN","Q"]
-ignore = ["ANN002", "ANN003", "ANN101", "ANN102", "ANN204"]
 
 [[tool.uv.index]]
 name = "gitverse"
 url = "https://gitverse.ru/sweetdogs?tab=packages"
 publish-url = "https://gitverse.ru/api/packages/sweetdogs/pypi"
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+
+
+[tool.ruff]
+line-length = 140
+
+[tool.ruff.lint]
+unfixable = ["B"]
+select = ["T20","B","F","E","I","UP","N","ANN","Q","COM","ERA","ASYNC","BLE","FIX","ISC","PIE","PTH"] # ["F","B","E","I","UP","N","ANN","Q"]
+ignore = ["ANN002", "ANN003", "ANN204"]
