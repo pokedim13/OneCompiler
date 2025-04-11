@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import Generic, TypeVar, Union, List, Dict
+from typing import Generic, TypeVar
 
 from httpx import Response
 
-from onecompiler.models import ExecModel, StatsModel, TemplatesModel, WorkspaceModel, WorkspacesModel, File
+from onecompiler.models import ExecModel, File, StatsModel, TemplatesModel, WorkspaceModel, WorkspacesModel
 
 T = TypeVar("T", bound="BaseOneCompiler")
 class BaseOneCompiler(ABC):
@@ -13,7 +13,7 @@ class BaseOneCompiler(ABC):
             self.onecompiler = onecompiler
 
         @staticmethod
-        def _get_exec_data(lang: str, files: Union[List[Dict], List[File]]) -> dict:
+        def _get_exec_data(lang: str, files: list[dict] | list[File]) -> dict:
             processed_files = []
             for file in files:
                 if isinstance(file, File):
@@ -28,7 +28,7 @@ class BaseOneCompiler(ABC):
                 },
             }
 
-        def exec(self, lang: str, files: Union[List[Dict], List[File]]) -> ExecModel:
+        def exec(self, lang: str, files: list[dict] | list[File]) -> ExecModel:
             return self.onecompiler._request("POST",
                                                 model=ExecModel,
                                                 url=f"{self.onecompiler._url}{self.prefix}exec",
